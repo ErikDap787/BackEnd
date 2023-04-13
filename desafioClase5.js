@@ -1,6 +1,10 @@
+const fs = require("fs");
+
 class ProductManager {
   constructor() {
     this.products = [];
+    this.path = "./productos.json";
+    fs.writeFileSync(this.path, JSON.stringify(this.products, null, "\t"));
   }
 
   getNextId() {
@@ -8,7 +12,8 @@ class ProductManager {
   }
 
   getProducts() {
-    return this.products;
+    const productsList = fs.readFileSync(this.path, "utf-8");
+    return JSON.parse(productsList);
   }
 
   addProduct({ title, description, price, thumbnail, code, stock }) {
@@ -28,11 +33,14 @@ class ProductManager {
     const product = { id, title, description, price, thumbnail, code, stock };
     this.products.push(product);
 
+    fs.writeFileSync(this.path, JSON.stringify(this.products, null, "\t"));
+
     return product;
   }
 
   getProductById(id) {
-    const product = this.products.find((product) => product.id === id);
+    const productsList = JSON.parse(fs.readFileSync(this.path, "utf-8"));
+    const product = productsList.find((product) => product.id === id);
     if (!product) {
       throw new Error("Error: Producto no encontrado");
     }
