@@ -46,6 +46,38 @@ class ProductManager {
     }
     return product;
   }
+
+  updateProduct(id, updatedFields) {
+    const productsList = this.getProducts();
+    const index = productsList.findIndex((product) => product.id === id);
+
+    if (index === -1) {
+      throw new Error("Error: Producto no encontrado");
+    }
+
+    const productToUpdate = productsList[index];
+    const updatedProduct = { ...productToUpdate, ...updatedFields };
+    productsList[index] = updatedProduct;
+
+    fs.writeFileSync(this.path, JSON.stringify(productsList, null, "\t"));
+
+    return updatedProduct;
+  }
+
+  deleteProduct(id) {
+    const productsList = this.getProducts();
+    const index = productsList.findIndex((product) => product.id === id);
+
+    if (index === -1) {
+      throw new Error("Error: Producto no encontrado");
+    }
+
+    const deletedProduct = productsList.splice(index, 1)[0];
+
+    fs.writeFileSync(this.path, JSON.stringify(productsList, null, "\t"));
+
+    return deletedProduct;
+  }
 }
 
 const manager = new ProductManager();
@@ -83,3 +115,20 @@ try {
 
 const productFound = manager.getProductById(1);
 console.log(productFound);
+
+const productUpdated = manager.updateProduct(1, {
+  description: "actualizado",
+});
+console.log(productUpdated);
+
+try {
+  manager.deleteProduct(1);
+} catch (error) {
+  console.log(error.message);
+}
+
+try {
+  manager.deleteProduct(2);
+} catch (error) {
+  console.log(error.message);
+}
