@@ -6,9 +6,9 @@ const manager = new ProductManager();
 
 app.use(express.json());
 
-app.get("/products", (req, res) => {
+app.get("/products", async (req, res) => {
   let limit = req.query.limit;
-  let productsList = manager.getProducts();
+  let productsList = await manager.getProducts();
   let response = {};
   if (limit) {
     response.productsList = productsList.slice(0, +limit);
@@ -19,10 +19,14 @@ app.get("/products", (req, res) => {
   res.send(response);
 });
 
-app.get("/products/:pid", (req, res) => {
+app.get("/products/:pid", async (req, res) => {
   let productSearch = req.params.pid;
-  let productFound = manager.getProductById(+productSearch);
-  res.send(productFound);
+  let productFound = await manager.getProductById(+productSearch);
+  if (productFound) {
+    res.send(productFound);
+  } else {
+    res.status(404).send("Error: El producto no existe");
+  }
 });
 
 app.listen(8080, () => console.log("Server listening"));

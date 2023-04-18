@@ -40,9 +40,6 @@ class ProductManager {
   getProductById(id) {
     const productsList = JSON.parse(fs.readFileSync(this.path, "utf-8"));
     const product = productsList.find((product) => product.id === id);
-    if (!product) {
-      throw new Error("Error: Producto no encontrado");
-    }
     return product;
   }
 
