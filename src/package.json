@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000B\u0000a\u0000c\u0000k\u0000E\u0000n\u0000d\u0000\r\u0000 \u0000",
+  "main": "App.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErikDap787/BackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErikDap787/BackEnd/issues"
+  },
+  "homepage": "https://github.com/ErikDap787/BackEnd#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}

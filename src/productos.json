@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Remera de manga corta",
+    "description": "Remera de manga corta para hombre",
+    "price": 29.99,
+    "thumbnail": "remera_manga_corta.jpg",
+    "code": "TSHIRT001",
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "title": "Pantalones vaqueros",
+    "description": "Pantalones vaqueros para mujer",
+    "price": 59.99,
+    "thumbnail": "pantalones_vaqueros.jpg",
+    "code": "JEANS001",
+    "stock": 30
+  },
+  {
+    "id": 3,
+    "title": "Campera de cuero",
+    "description": "Campera de cuero para hombre",
+    "price": 149.99,
+    "thumbnail": "campera_cuero.jpg",
+    "code": "LEATHERJACKET001",
+    "stock": 20
+  },
+  {
+    "id": 4,
+    "title": "Vestido de noche",
+    "description": "Vestido de noche para mujer",
+    "price": 99.99,
+    "thumbnail": "vestido_noche.jpg",
+    "code": "DRESS001",
+    "stock": 15
+  },
+  {
+    "id": 5,
+    "title": "Zapatillas deportivas",
+    "description": "Zapatillas deportivas para hombre",
+    "price": 79.99,
+    "thumbnail": "zapatillas_deportivas.jpg",
+    "code": "SNEAKERS001",
+    "stock": 40
+  },
+  {
+    "id": 6,
+    "title": "Falda de jean",
+    "description": "Falda de jean para mujer",
+    "price": 39.99,
+    "thumbnail": "falda_jean.jpg",
+    "code": "SKIRT001",
+    "stock": 25
+  },
+  {
+    "id": 7,
+    "title": "Buzo con capucha",
+    "description": "Buzo con capucha para hombre",
+    "price": 49.99,
+    "thumbnail": "buzo_capucha.jpg",
+    "code": "HOODIE001",
+    "stock": 35
+  },
+  {
+    "id": 8,
+    "title": "Shorts de deporte",
+    "description": "Shorts de deporte para mujer",
+    "price": 24.99,
+    "thumbnail": "shorts_deporte.jpg",
+    "code": "SHORTS001",
+    "stock": 20
+  },
+  {
+    "id": 9,
+    "title": "Gorra de béisbol",
+    "description": "Gorra de béisbol unisex",
+    "price": 19.99,
+    "thumbnail": "gorra_beisbol.jpg",
+    "code": "CAP001",
+    "stock": 50
+  },
+  {
+    "id": 10,
+    "title": "Medias deportivas",
+    "description": "Medias deportivas para hombre",
+    "price": 9.99,
+    "thumbnail": "mediass_deportivas.jpg",
+    "code": "SOCKS001",
+    "stock": 100
+  }
+]
