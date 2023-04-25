@@ -16,15 +16,7 @@ class ProductManager {
   }
 
   addProduct({ title, description, price, thumbnail, code, stock, category }) {
-    if (
-      !title ||
-      !description ||
-      !price ||
-      !code ||
-      !stock ||
-      !category ||
-      !status
-    ) {
+    if (!title || !description || !price || !code || !stock || !category) {
       throw new Error("Error: Faltan datos");
     }
 
