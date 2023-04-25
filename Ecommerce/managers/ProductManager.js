@@ -20,6 +20,9 @@ class ProductManager {
       throw new Error("Error: Faltan datos");
     }
 
+    const fileData = fs.readFileSync(this.path, "utf-8");
+    this.products = JSON.parse(fileData);
+
     const existingProduct = this.products.find(
       (product) => product.code === code
     );
@@ -28,10 +31,9 @@ class ProductManager {
       throw new Error("Error: Código de producto ya existente");
     }
 
-    const id = this.getNextId();
     const status = true;
     const product = {
-      id,
+      id: this.getNextId(),
       title,
       description,
       price,
@@ -40,6 +42,7 @@ class ProductManager {
       stock,
       status,
     };
+
     this.products.push(product);
 
     fs.writeFileSync(this.path, JSON.stringify(this.products, null, "\t"));

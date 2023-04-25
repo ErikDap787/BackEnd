@@ -45,7 +45,7 @@ class CartManager {
       } else {
         cart.products.push({ product: pid, quantity: 1 });
       }
-      fs.writeFileSync(this.path, JSON.stringify(this.carts, null, "\t"));
+      fs.writeFileSync(this.path, JSON.stringify(productsInCart, null, "\t"));
       return { message: "Producto agregado al carrito" };
     } else {
       throw new Error("Carrito no encontrado");
