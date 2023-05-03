@@ -11,9 +11,9 @@ app.use(express.json());
 const io = new Server(httpServer);
 
 app.engine("handlebars", handlebars.engine());
-app.set("views", "./views");
+app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
-app.use(express.static("./public"));
+app.use(express.static(__dirname + "/public"));
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/realTimeProducts", viewsRouter);
