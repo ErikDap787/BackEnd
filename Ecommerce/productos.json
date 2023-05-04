@@ -1,1 +1,38 @@
-[]
+[
+	{
+		"id": 1,
+		"title": "camiseta uruguay",
+		"description": "camiseta oficial seleccion de uruguay",
+		"price": 800,
+		"code": "AA202",
+		"stock": 150,
+		"status": true
+	},
+	{
+		"id": 2,
+		"title": "camiseta Brasil",
+		"description": "camiseta oficial seleccion de Brasil",
+		"price": 890,
+		"code": "AA203",
+		"stock": 150,
+		"status": true
+	},
+	{
+		"id": 3,
+		"title": "camiseta Argentina",
+		"description": "camiseta oficial seleccion de Argentina",
+		"price": 1000,
+		"code": "AA333",
+		"stock": 333,
+		"status": true
+	},
+	{
+		"id": 4,
+		"title": "camiseta Colombia",
+		"description": "camiseta oficial seleccion de Colombia",
+		"price": 1000,
+		"code": "AA322",
+		"stock": 333,
+		"status": true
+	}
+]

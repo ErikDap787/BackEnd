@@ -1,7 +1,11 @@
 import { Router } from "express";
+import ProductManager from "../managers/ProductManager.js";
 
 const router = Router();
+const manager = new ProductManager();
 
-router.get("/", (req, res) => res.render("realTimeProducts.hbs", {}));
+const productsList = manager.getProducts();
+
+router.get("/", (req, res) => res.render("home", { productsList }));
 
 export default router;
