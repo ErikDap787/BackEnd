@@ -23,10 +23,14 @@ const showList = (data) => {
     productsList.innerHTML = card;
   });
 };
+
+socketClient.on("newUser", () => alert("Nuevo usuario conectado"));
+
 const listOfProducts = () => {
   let productsList = manager.getProducts();
   socketClient.emit("productsList", { productsList });
 };
+
 socketClient.on("productsList", (productsList) => {
   showList(productsList);
 });

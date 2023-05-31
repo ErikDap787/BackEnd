@@ -1,0 +1,17 @@
+<h3>Carritos</h3>
+<div>
+        {{#if hasPrevPage }}
+            <a class="active" href='{{prevLink}}'>Anterior</a>
+        {{/if}}
+        {{#if hasNextPage }}
+            <a class="active" href='{{nextLink}}'>Siguiente</a>
+        {{/if}}
+</div>
+<div>
+{{#each docs}}
+    <div class="cart">
+        <h4>{{this._id}}</h4>
+        <a href="../carts/{{this._id}}">Ver Carrito</a>
+    </div>
+{{/each}}
+</div>
