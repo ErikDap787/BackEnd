@@ -1,5 +1,8 @@
 <section>
+<h2>Bienvenido, {{user.role}} {{user.first_name}}!</h2>
+
 <h1 class="text-center py-5">Productos</h1>
+
 <div class="container">
     <div class="row justify-content-around">
 {{#each payload}}
@@ -12,8 +15,8 @@
             <p class="card-text ">{{this.description}}</p>
             <p class="card-text fs-6 fw-bold">Precio:${{this.price}}</p>
             <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-danger"value="Agregar al carro">Añadir al carrito</a>
-                <button type="button" class="btn btn-dark"><a href="../products/{{this.id}}" class="verproducto" style="text-decoration: none; color:white">Ver detalles</a></button>
+                <a href="#" class="btn btn-danger"value="Agregar al carrito">Agregar al carrito</a>
+                <button type="button" class="btn btn-dark"><a href="../products/{{this.id}}" style="text-decoration: none; color:white">Ver detalles</a></button>
             </div>
         </div>
         </div>

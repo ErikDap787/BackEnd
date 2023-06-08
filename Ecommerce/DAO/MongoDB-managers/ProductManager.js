@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 import productModel from "../Models/productModel.js";
 
 const url =
-  "mongodb+srv://erikdapczuk: 123456789EAD@ecommercecluster.qmctabo.mongodb.net/Ecommerce";
+  "mongodb+srv://erikdapczuk:123456789EAD@ecommercecluster.qmctabo.mongodb.net";
 
 try {
   await mongoose.connect(url, { dbName: "Ecommerce" });
-  console.log("DB conected");
+  console.log("DB connected");
 } catch (err) {
   console.log(err);
 }

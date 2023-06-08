@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ProductManager from "../DAO/MongoDB-managers/ProductManager.js";
+import ProductManager from "../../DAO/MongoDB-managers/ProductManager.js";
 
 const router = Router();
 
@@ -38,5 +38,8 @@ router.delete("/delete/:id", async (req, res) => {
   manager.deleteProduct(req.params.id);
   res.send("Se ha eliminado el producto correctamente");
 });
+
+if (req.session.user) return res.render("products");
+res.redirect("/login");
 
 export default router;

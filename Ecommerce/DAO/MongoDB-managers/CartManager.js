@@ -24,7 +24,7 @@ class CartManager {
     try {
       const cartfound = await cartModel.findOne({ _id: cid }).lean().exec();
       if (cartfound === null) {
-        return { error: 2, errortxt: "el carro no existe" };
+        return { error: 2, errortxt: "el carrito no existe" };
       }
       return cartfound;
     } catch (error) {
@@ -48,7 +48,7 @@ class CartManager {
     try {
       const cartfound = await cartModel.findOne({ _id: cid });
       if (cartfound === null) {
-        return { error: 2, errortxt: "el carro no existe" };
+        return { error: 2, errortxt: "el carrito no existe" };
       }
       const prodexists = await productModel.findOne({ _id: pid });
       if (prodexists === null) {
@@ -116,7 +116,7 @@ class CartManager {
       }
       const cartfound = await cartModel.findOne({ _id: cid });
       if (cartfound === null) {
-        return { error: 2, errortxt: "el carro no existe" };
+        return { error: 2, errortxt: "el carrito no existe" };
       }
       const prodfound = await cartModel.findOne({
         _id: cid,
@@ -125,7 +125,7 @@ class CartManager {
       if (prodfound === null) {
         return {
           error: 2,
-          errortxt: "el producto no esta en el carro",
+          errortxt: "el producto no esta en el carrito",
         };
       } else {
         const updatedprod = await cartModel.updateOne(
@@ -143,7 +143,7 @@ class CartManager {
     try {
       const cartfound = await cartModel.findOne({ _id: cid });
       if (cartfound === null) {
-        return { error: 2, errortxt: "el carro no existe" };
+        return { error: 2, errortxt: "el carrito no existe" };
       }
       const deletedProducts = await cartModel.updateOne(
         { _id: cid },
@@ -158,7 +158,7 @@ class CartManager {
     try {
       const cartfound = await cartModel.findOne({ _id: cid });
       if (cartfound === null) {
-        return { error: 2, errortxt: "el carro no existe" };
+        return { error: 2, errortxt: "el carrito no existe" };
       }
       const prodfound = await cartModel.findOne({
         _id: cid,
@@ -167,7 +167,7 @@ class CartManager {
       if (prodfound === null) {
         return {
           error: 2,
-          errortxt: "el producto no esta en el carro",
+          errortxt: "el producto no esta en el carrito",
         };
       } else {
         const updatedprods = await cartModel.updateOne(
