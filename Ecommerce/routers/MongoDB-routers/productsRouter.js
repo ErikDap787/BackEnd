@@ -39,7 +39,12 @@ router.delete("/delete/:id", async (req, res) => {
   res.send("Se ha eliminado el producto correctamente");
 });
 
-if (req.session.user) return res.render("products");
-res.redirect("/login");
+router.get("/products", (req, res) => {
+  if (req.session.user) {
+    return res.render("products");
+  } else {
+    res.redirect("/login");
+  }
+});
 
 export default router;

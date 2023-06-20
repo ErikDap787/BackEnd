@@ -4,7 +4,7 @@ import passport from "passport";
 const router = Router();
 
 router.get("/register", (req, res) => {
-  res.render("/sessions/register");
+  res.render("sessions/register");
 });
 
 router.post(
@@ -68,5 +68,20 @@ router.get("/profile", (req, res) => {
     } else res.redirect("/login");
   });
 });
+
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] }),
+  (req, res) => {}
+);
+
+router.get(
+  "/githubcallback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  async (req, res) => {
+    req.session.user = req.user;
+    res.redirect("/");
+  }
+);
 
 export default router;

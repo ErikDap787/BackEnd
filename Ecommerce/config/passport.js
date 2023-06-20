@@ -50,8 +50,10 @@ const initializePassport = () => {
         try {
           const user = await UserModel.findOne({
             email: username,
-            password: password,
           });
+
+          console.log("user", user);
+
           if (!user) {
             console.log("El usuario no existe");
             return done(null, user);
@@ -59,7 +61,7 @@ const initializePassport = () => {
 
           if (
             username === "adminCoder@coder.com" &&
-            password === "adminCod3r123"
+            createHash(password) === user.password
           ) {
             user.role = "admin";
           } else {

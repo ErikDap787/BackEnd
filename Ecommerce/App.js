@@ -11,16 +11,16 @@ import cartRouter from "./routers/MongoDB-routers/cartRouter.js";
 import cartsRouter from "./routers/MongoDB-routers/cartsRouter.js";
 import productsRouter from "./routers/MongoDB-routers/productsRouter.js";
 import userRouter from "./routers/MongoDB-routers/userRouter.js";
+import cookieParser from "cookie-parser";
 
-const url =
-  "mongodb+srv://erikdapczuk:123456789EAD@ecommercecluster.qmctabo.mongodb.net";
+const uri = "mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
 
 const app = express();
 
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: url,
+      mongoUrl: uri,
       dbName: "sessions",
       mongoOptions: {
         useNewUrlParser: true,
@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
 app.engine("handlebars", handlebars.engine());
-app.set("views", "./src/views");
+app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
 app.use(express.json());
@@ -54,9 +54,11 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/carts", cartsRouter);
 app.use("/products", productsRouter);
+/*app.use("/jwt", jwtRouter) 
+  app.use(cookieParser())*/
 
 try {
-  await mongoose.connect(url, { dbName: "Ecommerce" });
+  await mongoose.connect(uri, { dbName: "Ecommerce" });
   console.log("DB connected");
   app.listen(8080, () => {
     console.log("Server listening");
