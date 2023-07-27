@@ -6,6 +6,8 @@ dotenv.config();
 
 const uri = process.env.MONGO_URL;
 
+console.log(uri);
+
 try {
   await mongoose.connect(uri, { dbName: "Ecommerce" });
   console.log("DB connected");
