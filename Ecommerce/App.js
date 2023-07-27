@@ -12,8 +12,11 @@ import cartsRouter from "./routers/MongoDB-routers/cartsRouter.js";
 import productsRouter from "./routers/MongoDB-routers/productsRouter.js";
 import userRouter from "./routers/MongoDB-routers/userRouter.js";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 
-const uri = "mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
+dotenv.config();
+
+const uri = process.env.MONGO_URL;
 
 const app = express();
 
@@ -28,7 +31,7 @@ app.use(
       },
       ttl: 120,
     }),
-    secret: "motdepasse",
+    secret: process.env.PRIVATE_KEY,
     resave: true,
     saveUninitialized: true,
   })
@@ -55,7 +58,9 @@ app.use("/api/carts", cartRouter);
 app.use("/carts", cartsRouter);
 app.use("/products", productsRouter);
 /*app.use("/jwt", jwtRouter) 
-  app.use(cookieParser())*/
+  app.use(cookieParser())
+  
+  CONFIGURAR NEXT STEP*/
 
 try {
   await mongoose.connect(uri, { dbName: "Ecommerce" });

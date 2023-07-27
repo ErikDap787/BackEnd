@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import productModel from "../Models/productModel.js";
+import dotenv from "dotenv";
 
-const uri = "mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
+dotenv.config();
+
+const uri = process.env.MONGO_URL;
 
 try {
   await mongoose.connect(uri, { dbName: "Ecommerce" });
