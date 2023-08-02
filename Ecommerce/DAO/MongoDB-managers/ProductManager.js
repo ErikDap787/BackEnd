@@ -4,7 +4,13 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const uri = process.env.MONGO_URL;
+const uri = "mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
+
+/*"mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
+
+/*"mongodb://localhost:27017/Ecommerce";*/
+
+/*process.env.MONGO_URL;*/
 
 console.log(uri);
 

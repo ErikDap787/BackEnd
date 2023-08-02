@@ -16,6 +16,14 @@ export const failedRegisterCtrl = (req, res) => {
   res.send({ error: "El registro no se ha podido completar" });
 };
 
+/*if (!user.first_name || !user.last_name || !user.email) {
+    CustomError.createError({
+        name: "User creation error",
+        cause: generateErrorInfo(user),
+        message: "Error trying to create a user",
+        code: EErros.INVALID_TYPES_ERROR
+    })                            EJEMPLO PARA APLICAR MANEJO DE ERRORES*/
+
 export const viewLoginCtrl = (req, res) => {
   res.render("sessions/login");
 };

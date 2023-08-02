@@ -13,12 +13,26 @@ import productsRouter from "./routers/MongoDB-routers/productsRouter.js";
 import userRouter from "./routers/MongoDB-routers/userRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import compression from "express-compression";
 
 dotenv.config();
 
-const uri = process.env.MONGO_URL;
+const uri = "mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
+
+/*"mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";*/
+
+/*"mongodb://localhost:27017/Ecommerce"; /*process.env.MONGO_URL*/
+
+console.log(uri);
+
+/*console.log(process.env.MONGO_URL);*/
 
 const app = express();
+
+app.use(
+  compression({ brotli: { enabled: true, zlib: {} } })
+); /*Lo mejor es comprimir unicamente las rutas que tardan mucho en cargar, no todo el programa. El contenido dentro de compression
+es el algoritmo de google, que ayuda a comprimir todavia mas la carga */
 
 app.use(
   session({
