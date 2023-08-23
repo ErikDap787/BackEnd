@@ -14,6 +14,10 @@ import userRouter from "./routers/MongoDB-routers/userRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import compression from "express-compression";
+import logger from "./reports/logger.js";
+import cluster from "cluster";
+import swaggerUiExpress from "swagger-ui-express";
+import swaggerjsdoc from "swagger-jsdoc";
 
 dotenv.config();
 
@@ -60,6 +64,20 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + "/public"));
 
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      title: "Ecommerce API",
+      description: "Ecommerce venta de productos de indumentaria",
+    },
+  },
+
+  apis: ["./docs/**/*.yaml"],
+};
+
+const specs = swaggerjsdoc(swaggerOptions);
+
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
@@ -67,6 +85,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 
 app.use("/", userRouter);
+app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/carts", cartsRouter);
@@ -85,3 +104,18 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+/*     LOGGER
+
+app.get("/", (req, res) => {
+  const user = req.query.user;
+  if (user === "test") {
+    logger.debug("Se ingresó a la ruta /");
+    logger.http("Se ingresó a la ruta /");
+    logger.info("Se ingresó a la ruta /");
+    logger.warning("Se ingresó a la ruta /");
+    logger.error("Se ingresó a la ruta /");
+    logger.fatal("Se ingresó a la ruta /");
+  }
+  res.json({ status: "success" });
+}); */
