@@ -1,0 +1,148 @@
+paths:
+  /productos:
+    get:
+      summary: Obtener una lista de productos
+      description: Recuperar una lista de productos con filtrado, paginación y ordenamiento opcionales.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Número de elementos por página
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Número de página
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Filtrar productos por categoría (Hombre, Mujer, Niño)
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: Ordenar productos por precio (asc o desc)
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: éxito
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  totalPages:
+                    type: integer
+                    example: 5
+                  prevPage:
+                    type: integer
+                    example: 2
+                  nextPage:
+                    type: integer
+                    example: 4
+                  page:
+                    type: integer
+                    example: 3
+                  hasPrevPage:
+                    type: boolean
+                    example: true
+                  hasNextPage:
+                    type: boolean
+                    example: true
+                  prevLink:
+                    type: string
+                  nextLink:
+                    type: string
+
+  /productos/{id}:
+    get:
+      summary: Obtener un producto por ID
+      description: Recuperar un producto único por su ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Producto no encontrado
+
+  /productos/crear:
+    get:
+      summary: Ver página de creación de producto
+      description: Mostrar la página para crear un nuevo producto.
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /productos:
+    post:
+      summary: Crear un nuevo producto
+      description: Crear un nuevo producto con los detalles proporcionados.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /productos/eliminar/{id}:
+    delete:
+      summary: Eliminar un producto
+      description: Eliminar un producto por su ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto a eliminar
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /productos/todos:
+    get:
+      summary: Ver todos los productos
+      description: Mostrar la página para ver todos los productos.
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID del producto
+        name:
+          type: string
+          description: Nombre del producto
+        price:
+          type: number
+          format: float
+          description: Precio del producto
+        category:
+          type: string
+          description: Categoría del producto (Hombre, Mujer, Niño)

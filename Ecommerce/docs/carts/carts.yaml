@@ -1,0 +1,178 @@
+paths:
+  /carts:
+    get:
+      summary: Obtener una lista de carritos
+      description: Recuperar una lista de carritos con filtrado, paginación y ordenamiento opcionales.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Número de elementos por página
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Número de página
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Consulta JSON para filtrar carritos
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: Ordenar carritos (por ejemplo, "+campo" o "-campo")
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: éxito
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cart'
+                  totalPages:
+                    type: integer
+                    example: 5
+                  prevPage:
+                    type: integer
+                    example: 2
+                  nextPage:
+                    type: integer
+                    example: 4
+                  page:
+                    type: integer
+                    example: 3
+                  hasPrevPage:
+                    type: boolean
+                    example: true
+                  hasNextPage:
+                    type: boolean
+                    example: true
+                  prevLink:
+                    type: string
+                  nextLink:
+                    type: string
+
+  /carts/{cid}:
+    get:
+      summary: Obtener un carrito por ID
+      description: Recuperar un carrito único por su ID.
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Carrito no encontrado
+
+  /carts:
+    post:
+      summary: Crear un nuevo carrito
+      description: Crear un nuevo carrito vacío.
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /carts/{cid}/product/{pid}:
+    post:
+      summary: Agregar un producto al carrito
+      description: Agregar un producto al carrito mediante su ID de carrito y el ID de producto.
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /carts/{cid}:
+    delete:
+      summary: Eliminar todos los productos del carrito
+      description: Eliminar todos los productos del carrito mediante su ID.
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /carts/{cid}/product/{pid}:
+    delete:
+      summary: Eliminar un producto del carrito
+      description: Eliminar un producto del carrito mediante su ID de carrito y el ID de producto.
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto
+      responses:
+        '200':
+          description: Respuesta exitosa
+
+  /carts/{cid}/product/{pid}:
+    put:
+      summary: Actualizar la cantidad de un producto en el carrito
+      description: Actualizar la cantidad de un producto en el carrito mediante su ID de carrito y el ID de producto.
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                qty:
+                  type: integer
+                  description: Nueva cantidad del producto en el carrito
+             
