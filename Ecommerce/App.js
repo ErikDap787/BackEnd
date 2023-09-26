@@ -14,7 +14,7 @@ import userRouter from "./routers/MongoDB-routers/userRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import compression from "express-compression";
-import logger from "./reports/logger.js";
+import logger from "../clases/reports/logger.js";
 import cluster from "cluster";
 import swaggerUiExpress from "swagger-ui-express";
 import swaggerjsdoc from "swagger-jsdoc";
@@ -22,6 +22,8 @@ import swaggerjsdoc from "swagger-jsdoc";
 dotenv.config();
 
 const uri = "mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";
+
+/*Por alguna razon, no logro conectarme a MongoDB cuando uso la variable de entorno, solo si uso aqui directamente la direccion*/
 
 /*"mongodb+srv://erikdapczuk:13579ead@ecommerce.95xtgye.mongodb.net";*/
 
