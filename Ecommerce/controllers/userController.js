@@ -3,6 +3,7 @@ import userDto from "../DTO/userDTO";
 import User from "../DAO/Models/userModel.js";
 import { transporter } from "../utils.js";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 export const viewRegisterCtrl = (req, res) => {
   res.render("sessions/register");
@@ -106,27 +107,22 @@ export const getAllUsersCtrl = async (req, res) => {
 
 export const deleteInactiveUsersCtrl = async (req, res) => {
   try {
-    // Define el período de inactividad (2 días en milisegundos)
     const inactivePeriod = 2 * 24 * 60 * 60 * 1000;
 
-    // Calcula la fecha límite para la inactividad (hace 2 días)
     const twoDaysAgo = new Date(Date.now() - inactivePeriod);
 
-    // Encuentra usuarios inactivos
     const inactiveUsers = await User.find({
       lastConnectionDate: { $lt: twoDaysAgo },
     });
 
-    // Itera sobre usuarios inactivos y envía correos de notificación
     for (const user of inactiveUsers) {
       const mailOptions = {
-        from: GMAIL_USER, // Tu dirección de correo electrónico
-        to: user.email, // Correo electrónico del destinatario
+        from: GMAIL_USER,
+        to: user.email,
         subject: "Notificación de eliminación de cuenta por inactividad",
         text: "Tu cuenta ha sido eliminada debido a la inactividad durante los últimos 2 días.",
       };
 
-      // Envía el correo electrónico utilizando el transporte de correo configurado
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
           console.error("Error al enviar el correo electrónico:", error);
@@ -135,7 +131,6 @@ export const deleteInactiveUsersCtrl = async (req, res) => {
         }
       });
 
-      // Elimina el usuario inactivo por su ID
       await User.findOneAndDelete({ _id: user._id });
     }
 
@@ -148,15 +143,20 @@ export const deleteInactiveUsersCtrl = async (req, res) => {
   }
 };
 
-// ... Importaciones y configuración de nodemailer y User model como se hizo antes ...
-
 export const updateUserRoleCtrl = async (req, res) => {
   try {
-    const userId = req.params.userId; // Obtén el ID del usuario cuyo rol deseas actualizar
-    const newRole = req.body.role; // Supongamos que envías el nuevo rol en el cuerpo de la solicitud
+    const userId = req.params.userId;
+    const newRole = req.body.role;
 
-    // Realiza la lógica para actualizar el rol del usuario por su ID (usando Mongoose u otro ORM)
-    // ...
+    const user = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: { role: newRole } },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
 
     res.json({ message: "Rol de usuario actualizado con éxito" });
   } catch (error) {
@@ -167,24 +167,26 @@ export const updateUserRoleCtrl = async (req, res) => {
 
 export const deleteUserCtrl = async (req, res) => {
   try {
-    const userId = req.params.userId; // Obtén el ID del usuario a eliminar
+    const userId = req.params.userId;
 
-    // Realiza la lógica para eliminar al usuario por su ID (usando Mongoose u otro ORM)
-    // ...
+    const user = await UserModel.findByIdAndRemove(userId);
 
-    res.render("success", { message: "Usuario eliminado con éxito" });
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.json({ message: "Usuario eliminado con éxito" });
   } catch (error) {
     console.error(error);
-    res.render("error", { message: "Error al eliminar el usuario" });
+    res.status(500).json({ message: "Error al eliminar el usuario" });
   }
 };
 
 export const adminAccess = (req, res, next) => {
-  // Supongamos que tienes información del usuario autenticado en req.user
-  const user = req.user; // Asumiendo que tienes un objeto de usuario con un campo 'role'
+  const user = req.user;
 
   if (user && user.role === "admin") {
-    next(); // El usuario tiene permisos de administrador, continuar
+    next();
   } else {
     res.render("error", {
       message: "Acceso denegado. Se requieren permisos de administrador.",
