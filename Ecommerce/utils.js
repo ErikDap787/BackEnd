@@ -3,6 +3,7 @@ import { dirname } from "path";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -28,6 +29,14 @@ export const authToken = (req, res, next) => {
       next()
   })
 } */
+
+export const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: GMAIL_USER,
+    password: GMAIL_PASSWORD,
+  },
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

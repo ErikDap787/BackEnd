@@ -90,10 +90,7 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/carts", cartsRouter);
 app.use("/products", productsRouter);
-/*app.use("/jwt", jwtRouter) 
-  app.use(cookieParser())
-  
-  CONFIGURAR NEXT STEP*/
+app.use("/api/users", userRouter);
 
 try {
   await mongoose.connect(uri, { dbName: "Ecommerce" });
@@ -104,18 +101,3 @@ try {
 } catch (error) {
   console.log(error);
 }
-
-/*     LOGGER
-
-app.get("/", (req, res) => {
-  const user = req.query.user;
-  if (user === "test") {
-    logger.debug("Se ingresó a la ruta /");
-    logger.http("Se ingresó a la ruta /");
-    logger.info("Se ingresó a la ruta /");
-    logger.warning("Se ingresó a la ruta /");
-    logger.error("Se ingresó a la ruta /");
-    logger.fatal("Se ingresó a la ruta /");
-  }
-  res.json({ status: "success" });
-}); */
