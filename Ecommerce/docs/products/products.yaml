@@ -25,7 +25,7 @@ paths:
             type: string
           description: Ordenar productos por precio (asc o desc)
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
           content:
             application/json:
@@ -38,7 +38,7 @@ paths:
                   payload:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Product'
+                      $ref: "#/components/schemas/Product"
                   totalPages:
                     type: integer
                     example: 5
@@ -61,6 +61,18 @@ paths:
                     type: string
                   nextLink:
                     type: string
+    post:
+      summary: Crear un nuevo producto
+      description: Crear un nuevo producto con los detalles proporcionados.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Respuesta exitosa
 
   /productos/{id}:
     get:
@@ -74,13 +86,13 @@ paths:
           required: true
           description: ID del producto
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
-        '404':
+                $ref: "#/components/schemas/Product"
+        "404":
           description: Producto no encontrado
 
   /productos/crear:
@@ -88,21 +100,7 @@ paths:
       summary: Ver página de creación de producto
       description: Mostrar la página para crear un nuevo producto.
       responses:
-        '200':
-          description: Respuesta exitosa
-
-  /productos:
-    post:
-      summary: Crear un nuevo producto
-      description: Crear un nuevo producto con los detalles proporcionados.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product'
-      responses:
-        '200':
+        "200":
           description: Respuesta exitosa
 
   /productos/eliminar/{id}:
@@ -117,7 +115,7 @@ paths:
           required: true
           description: ID del producto a eliminar
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
 
   /productos/todos:
@@ -125,7 +123,7 @@ paths:
       summary: Ver todos los productos
       description: Mostrar la página para ver todos los productos.
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
 
 components:

@@ -31,12 +31,13 @@ export const authToken = (req, res, next) => {
 } */
 
 export const transporter = nodemailer.createTransport({
-  service: "Gmail",
+  service: "Gmx",
   auth: {
-    user: GMAIL_USER,
-    password: GMAIL_PASSWORD,
+    user: "erikdap787@gmx.es",
+    password: "13579ead1996",
   },
 });
+/*GMX_USER, GMX_PASSWORD*/
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

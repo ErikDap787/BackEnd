@@ -1,5 +1,5 @@
 import passport from "passport";
-import userDto from "../DTO/userDTO";
+import userDto from "../DTO/userDTO.js";
 import User from "../DAO/Models/userModel.js";
 import { transporter } from "../utils.js";
 import dotenv from "dotenv";
@@ -115,9 +115,11 @@ export const deleteInactiveUsersCtrl = async (req, res) => {
       lastConnectionDate: { $lt: twoDaysAgo },
     });
 
+    /*GMX_USER*/
+
     for (const user of inactiveUsers) {
       const mailOptions = {
-        from: GMAIL_USER,
+        from: "erikdap787@gmx.es",
         to: user.email,
         subject: "Notificación de eliminación de cuenta por inactividad",
         text: "Tu cuenta ha sido eliminada debido a la inactividad durante los últimos 2 días.",

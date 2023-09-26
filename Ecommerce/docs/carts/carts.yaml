@@ -25,7 +25,7 @@ paths:
             type: string
           description: Ordenar carritos (por ejemplo, "+campo" o "-campo")
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
           content:
             application/json:
@@ -38,7 +38,7 @@ paths:
                   payload:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Cart'
+                      $ref: "#/components/schemas/Cart"
                   totalPages:
                     type: integer
                     example: 5
@@ -62,6 +62,13 @@ paths:
                   nextLink:
                     type: string
 
+    post:
+      summary: Crear un nuevo carrito
+      description: Crear un nuevo carrito vacío.
+      responses:
+      "200":
+        description: Respuesta exitosa
+
   /carts/{cid}:
     get:
       summary: Obtener un carrito por ID
@@ -74,22 +81,28 @@ paths:
           required: true
           description: ID del carrito
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cart'
-        '404':
+                $ref: "#/components/schemas/Cart"
+        "404":
           description: Carrito no encontrado
 
-  /carts:
-    post:
-      summary: Crear un nuevo carrito
-      description: Crear un nuevo carrito vacío.
+    delete:
+      summary: Eliminar todos los productos del carrito
+      description: Eliminar todos los productos del carrito mediante su ID
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
       responses:
-        '200':
-          description: Respuesta exitosa
+    "200":
+      description: Respuesta exitosa
 
   /carts/{cid}/product/{pid}:
     post:
@@ -109,25 +122,8 @@ paths:
           required: true
           description: ID del producto
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
-
-  /carts/{cid}:
-    delete:
-      summary: Eliminar todos los productos del carrito
-      description: Eliminar todos los productos del carrito mediante su ID.
-      parameters:
-        - in: path
-          name: cid
-          schema:
-            type: string
-          required: true
-          description: ID del carrito
-      responses:
-        '200':
-          description: Respuesta exitosa
-
-  /carts/{cid}/product/{pid}:
     delete:
       summary: Eliminar un producto del carrito
       description: Eliminar un producto del carrito mediante su ID de carrito y el ID de producto.
@@ -145,10 +141,8 @@ paths:
           required: true
           description: ID del producto
       responses:
-        '200':
+        "200":
           description: Respuesta exitosa
-
-  /carts/{cid}/product/{pid}:
     put:
       summary: Actualizar la cantidad de un producto en el carrito
       description: Actualizar la cantidad de un producto en el carrito mediante su ID de carrito y el ID de producto.
@@ -175,4 +169,3 @@ paths:
                 qty:
                   type: integer
                   description: Nueva cantidad del producto en el carrito
-             

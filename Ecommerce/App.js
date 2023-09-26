@@ -11,11 +11,8 @@ import cartRouter from "./routers/MongoDB-routers/cartRouter.js";
 import cartsRouter from "./routers/MongoDB-routers/cartsRouter.js";
 import productsRouter from "./routers/MongoDB-routers/productsRouter.js";
 import userRouter from "./routers/MongoDB-routers/userRouter.js";
-import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import compression from "express-compression";
-import logger from "../clases/reports/logger.js";
-import cluster from "cluster";
 import swaggerUiExpress from "swagger-ui-express";
 import swaggerjsdoc from "swagger-jsdoc";
 
@@ -35,10 +32,7 @@ console.log(uri);
 
 const app = express();
 
-app.use(
-  compression({ brotli: { enabled: true, zlib: {} } })
-); /*Lo mejor es comprimir unicamente las rutas que tardan mucho en cargar, no todo el programa. El contenido dentro de compression
-es el algoritmo de google, que ayuda a comprimir todavia mas la carga */
+app.use(compression({ brotli: { enabled: true, zlib: {} } }));
 
 app.use(
   session({
@@ -97,7 +91,10 @@ app.use("/api/users", userRouter);
 try {
   await mongoose.connect(uri, { dbName: "Ecommerce" });
   console.log("DB connected");
-  app.listen(8080, () => {
+
+  const port = process.env.PORT || 3000;
+
+  app.listen(port, "0.0.0.0", () => {
     console.log("Server listening");
   });
 } catch (error) {
