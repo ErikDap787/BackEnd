@@ -9,6 +9,7 @@ import initializePassport from "./config/passport.js";
 import productRouter from "./routers/MongoDB-routers/productRouter.js";
 import cartRouter from "./routers/MongoDB-routers/cartRouter.js";
 import cartsRouter from "./routers/MongoDB-routers/cartsRouter.js";
+import checkoutRouter from "./routers/MongoDB-routers/checkoutRouter.js";
 import productsRouter from "./routers/MongoDB-routers/productsRouter.js";
 import userRouter from "./routers/MongoDB-routers/userRouter.js";
 import dotenv from "dotenv";
@@ -87,6 +88,7 @@ app.use("/api/carts", cartRouter);
 app.use("/carts", cartsRouter);
 app.use("/products", productsRouter);
 app.use("/api/users", userRouter);
+app.use("/checkout", checkoutRouter);
 
 try {
   await mongoose.connect(uri, { dbName: "Ecommerce" });

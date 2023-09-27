@@ -1,18 +1,17 @@
-
 <h1>Confirmación de Compra</h1>
 <h2>Resumen de la compra:</h2>
 <ul>
   {{#each cartItems}}
     <li>
-      <span>{{ this.name }}</span>
-      <span>Precio: {{ this.price }}</span>
-      <span>Cantidad: {{ this.quantity }}</span>
+      <span>{{this.name}}</span>
+      <span>Precio: {{this.price}}</span>
+      <span>Cantidad: {{this.quantity}}</span>
     </li>
   {{/each}}
 </ul>
-<p>Total: {{ cartTotal }}</p>
+<p>Total: {{cartTotal}}</p>
 <form action="/checkout" method="POST">
   <label for="shippingAddress">Dirección de Envío:</label>
-  <input type="text" id="shippingAddress" name="shippingAddress" required>
+  <input type="text" id="shippingAddress" name="shippingAddress" required />
   <button type="submit">Confirmar Compra</button>
 </form>
