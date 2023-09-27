@@ -3,3 +3,4 @@ FS-managers
 FS-routers
 index.html
 Dockerfile
+.env
